@@ -1,0 +1,47 @@
+#include<stdio.h>
+#include<string.h>
+void show(char c,int n){
+    for(int i=1;i<=n;i++)
+    printf("%c",c);
+}
+int main(){
+int t;
+scanf("%d",&t);
+int l=1;
+while(l<=t){
+char s[101];
+scanf("%s",s);
+printf("Case #%d: ",l);
+if(strlen(s)==1){
+    show('(',(int)s[0]-48);
+    printf("%c",s[0]);
+    show(')',(int)s[0]-48);
+}
+else{
+for(int i=0;i<strlen(s);i++){
+    if(i==0){
+        show('(',(int)s[i]-48);
+        printf("%c",s[i]);
+        if((int)s[i]>(int)s[i+1])
+            show(')',(int)s[i]-(int)s[i+1]);
+        else
+            show('(',(int)s[i+1]-(int)s[i]);
+        }
+    else if(i==(strlen(s)-1)){
+        printf("%c",s[i]);
+        show(')',(int)s[i]-48);
+    }
+    else{
+         printf("%c",s[i]);
+          if((int)s[i]>(int)s[i+1])
+            show(')',(int)s[i]-(int)s[i+1]);
+        else
+            show('(',(int)s[i+1]-(int)s[i]);
+    }
+  }
+}
+  printf("\n");
+  l++;
+ }
+return 0;
+}
