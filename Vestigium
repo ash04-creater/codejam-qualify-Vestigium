@@ -1,0 +1,41 @@
+#include<stdio.h>
+int main(){
+int t;
+scanf("%d",&t);
+int l=1;
+while(l<=t){
+int n;
+scanf("%d",&n);
+int a[100]={0};
+int p=(n*(n+1))/2;
+int s=0,r=0,c=0,trace=0,q=1;
+for(int i=1;i<=n*n;i++){
+int k;
+scanf("%d",&k);
+s+=k;
+if(i%n==0){
+if(s!=p)
+r++;
+s=0;
+a[n-1]+=k;
+}
+a[(i%n)-1]+=k;
+if(i/n==(q-1)&&i%n==q){
+trace+=k;
+if(q==n-1)
+q=0;
+else
+q++;
+}
+if(i==n*n)
+trace+=k;
+}
+for(int i=0;i<n;i++){
+if(a[i]!=p)
+c++;
+}
+printf("Case #%d: %d %d %d\n",l,trace,r,c);
+l++;
+}
+return 0;
+}
