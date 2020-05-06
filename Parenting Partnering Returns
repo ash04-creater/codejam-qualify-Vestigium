@@ -1,0 +1,76 @@
+#include<stdio.h>
+int a[1000][2];char s[1001];
+void search(int f,int b,char c,int n){
+    for(int i=0;i<n;i++){
+    if(a[i][0]==f&&a[i][1]==b){
+    a[i][0]=-1;
+     a[i][1]=-1;
+    s[i]=c;
+    break;
+    }
+    }
+}
+int main(){
+int t;
+scanf("%d",&t);
+int l=1;
+while(l<=t){
+    int n;
+    scanf("%d",&n); 
+    int arr[n][2];
+    for(int i=0;i<n;i++){
+        scanf("%d%d",&a[i][0],&a[i][1]);
+        arr[i][0]=a[i][0];
+        arr[i][1]=a[i][1];
+    }
+        for(int i=0;i<n-1;i++){
+            int min=i;
+            for(int j=i+1;j<n;j++){
+                if(arr[j][0]<arr[min][0])
+                    min=j;
+            }
+            int t=arr[i][0];
+            arr[i][0]=arr[min][0];
+             arr[min][0]=t;
+             t=arr[i][1];
+             arr[i][1]=arr[min][1];
+             arr[min][1]=t;
+                }
+             search(arr[0][0],arr[0][1],'C',n);
+                int f=0,ce=arr[0][1],je=0,p=0;
+            for(int i=1;i<n;i++){
+                 p=0;
+                    if(arr[i][0]>=ce){
+                    search(arr[i][0],arr[i][1],'C',n);
+                    ce=arr[i][1];
+                    p=1;
+                    }
+                    else{
+                        if(f==0){
+                            search(arr[i][0],arr[i][1],'J',n);
+                            f=1;
+                            je=arr[i][1];
+                            p=1;
+                        }
+                        else{
+                            if(arr[i][0]>=je){
+                            search(arr[i][0],arr[i][1],'J',n);
+                            je=arr[i][1];
+                            p=1;
+                            }
+                        }
+                    }
+                    if(p==0){
+                    printf("Case #%d: IMPOSSIBLE\n",l);
+                    break;
+                    }
+                }
+                if(p==1)
+                printf("Case #%d: %s\n",l,s);
+                for(int i=0;i<n;i++)
+                s[i]='\0';    
+                l++;
+            
+            }
+            return 0;
+         }
